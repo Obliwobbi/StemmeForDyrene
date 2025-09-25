@@ -7,11 +7,11 @@ export default {
         extend: {
             colors: {
                 brand: {
-                    bg: '#FFF7FA',
+                    bg: '#FFD4D0',
                     text: '#2C2C2C',
-                    primary: '#A7C7E7',
+                    primary: '#FFEED6',
                     secondary: '#F5B7B1',
-                    accent: '#C3E6CB',
+                    accent: '#A7C7E7',
                 }
             },
             fontFamily: {

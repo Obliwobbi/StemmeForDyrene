@@ -46,7 +46,7 @@ footer {
 
 
 
-/* Du kan stadig bruge Tailwind utilities herunder: */
+/* You can still use Tailwind utilities below: */
 .container {
     @apply max-w-6xl mx-auto px-4;
 }
