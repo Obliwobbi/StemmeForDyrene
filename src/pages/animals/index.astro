@@ -1,0 +1,27 @@
+---
+import Base from "../../layouts/Base.astro";
+import { animals } from "../../data/animals.ts";
+---
+
+<Base title="Viden om dyr – StemmeForDyrene">
+    <section class="container py-12">
+        <h1 class="font-heading text-3xl mb-6">Viden om dyr</h1>
+        <p class="opacity-80 mb-6">
+            Søg viden om pleje, foder, og boligkrav for forskellige dyr.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            {
+                animals.map((a) => (
+                    <a
+                        href={`/animals/${a.slug}`}
+                        class="block bg-white rounded-2xl border border-brand-primary/20 p-5 shadow-soft hover:border-brand-primary"
+                    >
+                        <h2 class="font-heading text-xl">{a.name}</h2>
+                        <p class="text-sm opacity-80 mt-1">{a.short}</p>
+                    </a>
+                ))
+            }
+        </div>
+    </section>
+</Base>

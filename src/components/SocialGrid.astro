@@ -1,0 +1,32 @@
+---
+const {
+    instagramUrl = "#",
+    tiktokUrl = "#",
+    title = "Følg med på sociale medier",
+} = Astro.props;
+---
+
+<section class="container my-12">
+    <h2 class="font-heading text-2xl mb-4">{title}</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-4 shadow-soft">
+            <h3 class="font-heading mb-2">Instagram</h3>
+            <!-- Basic embed via iframe eller bare link kort -->
+            <a
+                href={instagramUrl}
+                class="block rounded-lg border p-4 hover:border-brand-secondary"
+            >
+                Se seneste opslag →
+            </a>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-soft">
+            <h3 class="font-heading mb-2">TikTok</h3>
+            <a
+                href={tiktokUrl}
+                class="block rounded-lg border p-4 hover:border-brand-secondary"
+            >
+                Se seneste videoer →
+            </a>
+        </div>
+    </div>
+</section>

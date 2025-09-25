@@ -1,0 +1,38 @@
+---
+import Base from "../../layouts/Base.astro";
+const posts = await Astro.glob("./*.md");
+---
+
+<Base title="Blog & Artikler – StemmeForDyrene">
+    <section class="container py-12">
+        <h1 class="font-heading text-3xl mb-6">Blog & Artikler</h1>
+        <div class="space-y-4">
+            {
+                posts
+                    .sort(
+                        (a, b) =>
+                            new Date(b.frontmatter.date).getTime() -
+                            new Date(a.frontmatter.date).getTime(),
+                    )
+                    .map((p) => (
+                        <a
+                            href={p.url}
+                            class="block bg-white rounded-2xl border border-brand-primary/20 p-5 shadow-soft hover:border-brand-primary"
+                        >
+                            <h2 class="font-heading text-xl">
+                                {p.frontmatter.title}
+                            </h2>
+                            <p class="text-sm opacity-80 mt-1">
+                                {p.frontmatter.excerpt}
+                            </p>
+                            <p class="text-xs opacity-60 mt-2">
+                                {new Date(
+                                    p.frontmatter.date,
+                                ).toLocaleDateString("da-DK")}
+                            </p>
+                        </a>
+                    ))
+            }
+        </div>
+    </section>
+</Base>
