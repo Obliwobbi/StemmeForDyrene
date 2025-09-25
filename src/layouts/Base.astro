@@ -1,10 +1,15 @@
 ---
 import "../styles/tailwind.css";
+import logoUrl from "../assets/StemmeForDyrene_logo.png";
+
 const {
     title = "StemmeForDyrene",
     description = "Viden, omsorg og kærlighed til kæledyr",
     noIndex = false,
 } = Astro.props;
+
+// VIGTIGT for GitHub Pages: base bliver fx "/stemmefordyrene/" i prod, "/" lokalt
+const base = import.meta.env.BASE_URL;
 ---
 
 <html lang="da">
@@ -19,9 +24,9 @@ const {
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap"
             rel="stylesheet"
         />
-
         <title>{title}</title>
     </head>
+
     <body class="min-h-[100svh] flex flex-col">
         <header
             class="sticky top-0 z-50 border-b border-brand-primary/30 bg-white/70 backdrop-blur"
@@ -31,35 +36,45 @@ const {
             >
                 <!-- Venstre navigation -->
                 <nav class="flex justify-end gap-6 text-lg leading-none">
-                    <a href="/" class="hover:text-brand-secondary">Forside</a>
-                    <a href="/animals" class="hover:text-brand-secondary"
-                        >Guides</a
+                    <a href={`${base}`} class="py-2 hover:text-brand-secondary"
+                        >Forside</a
                     >
-                    <a href="/blog" class="hover:text-brand-secondary">Blog</a>
+                    <a
+                        href={`${base}animals`}
+                        class="py-2 hover:text-brand-secondary">Guides</a
+                    >
+                    <a
+                        href={`${base}blog`}
+                        class="py-2 hover:text-brand-secondary">Blog</a
+                    >
                 </nav>
 
                 <!-- Logo (midterkolonne er 'auto' = kun logoets bredde) -->
                 <a
-                    href="/"
+                    href={`${base}`}
                     aria-label="Forside"
-                    class="inline-flex items-center shrink-0 mx-2 gap-10"
+                    class="inline-flex items-center shrink-0 mx-6 md:mx-10"
                 >
                     <img
-                        src="/StemmeForDyrene_logo.png"
+                        src={logoUrl.src}
                         alt="StemmeForDyrene"
-                        class="h-10 w-10"
+                        class="block h-10 w-10"
                     />
                 </a>
 
                 <!-- Højre navigation -->
                 <nav class="flex justify-start gap-6 text-lg leading-none">
-                    <a href="/blog" class="hover:text-brand-secondary"
-                        >Ressourcer</a
+                    <a
+                        href={`${base}blog`}
+                        class="py-2 hover:text-brand-secondary">Ressourcer</a
                     >
-                    <a href="/blog" class="hover:text-brand-secondary">Om mig</a
+                    <a
+                        href={`${base}blog`}
+                        class="py-2 hover:text-brand-secondary">Om mig</a
                     >
-                    <a href="/blog" class="hover:text-brand-secondary"
-                        >Kontakt</a
+                    <a
+                        href={`${base}blog`}
+                        class="py-2 hover:text-brand-secondary">Kontakt</a
                     >
                 </nav>
             </div>
