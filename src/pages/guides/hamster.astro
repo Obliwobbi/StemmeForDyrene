@@ -1,0 +1,29 @@
+---
+import Base from "../../layouts/Base.astro";
+import { animals } from "../../data/animals";
+const base = import.meta.env.BASE_URL;
+---
+
+<Base title="Hamster guide – StemmeForDyrene">
+    <section class="container py-12">
+        <h1 class="font-heading text-3xl mb-6">Hamster guide</h1>
+        <div class="grid md:grid-cols-2 gap-6">
+            {
+                animals
+                    .filter((a) => a.slug === "hamster")
+                    .map((a) => (
+                        <div class="block bg-white rounded-2xl border border-brand-primary/20 p-5 shadow-soft hover:border-brand-primary">
+                            <h2 class="font-heading text-xl">{a.name}</h2>
+                            <p class="text-sm opacity-80 mt-1">{a.short}</p>
+                            <div class="mt-4">
+                                <h3 class="font-heading text-lg mb-2">
+                                    Pleje og boligkrav
+                                </h3>
+                                <p class="text-sm opacity-80">{a.long}</p>
+                            </div>
+                        </div>
+                    ))
+            }
+        </div>
+    </section></Base
+>

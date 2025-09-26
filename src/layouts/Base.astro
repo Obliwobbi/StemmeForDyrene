@@ -2,6 +2,8 @@
 import "../styles/tailwind.css";
 import logoUrl from "../assets/StemmeForDyrene_logo.png";
 
+import SocialGrid from "../components/SocialGrid.astro";
+
 const {
     title = "StemmeForDyrene",
     description = "Viden, omsorg og kærlighed til kæledyr",
@@ -35,14 +37,90 @@ const base = import.meta.env.BASE_URL;
                 class="container grid grid-cols-[1fr_auto_1fr] items-center gap-x-8 py-3 md:py-4"
             >
                 <!-- Venstre navigation -->
+                <!-- Venstre navigation -->
                 <nav class="flex justify-end gap-6 text-lg leading-none">
                     <a href={`${base}`} class="py-2 hover:text-brand-secondary"
                         >Forside</a
                     >
-                    <a
-                        href={`${base}animals`}
-                        class="py-2 hover:text-brand-secondary">Guides</a
-                    >
+
+                    <!-- GUIDES + DROPDOWN -->
+                    <div class="relative group">
+                        <!-- Primært link til den fulde oversigt -->
+                        <a
+                            href={`${base}guides`}
+                            class="py-2 inline-flex items-center gap-1 hover:text-brand-secondary"
+                            aria-haspopup="true"
+                        >
+                            Guides
+                            <!-- lille caret -->
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-[1.05em] w-[1.05em] opacity-70"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.146l3.71-3.915a.75.75 0 111.08 1.04l-4.24 4.47a.75.75 0 01-1.08 0l-4.24-4.47a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+
+                        <!-- Dropdown (vises på hover/focus) -->
+                        <div
+                            class="absolute left-1/2 -translate-x-1/2 mt-2 w-56 rounded-xl border border-brand-primary/20 bg-white shadow-xl
+             opacity-0 invisible translate-y-1 transition-all duration-150 ease-out
+             group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
+             group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 z-50"
+                            role="menu"
+                        >
+                            <ul class="py-2">
+                                <!-- Tilpas dyrene og stierne efter din struktur -->
+                                <li>
+                                    <a
+                                        href={`${base}guides/hund`}
+                                        class="block px-4 py-2 hover:bg-brand-primary/5"
+                                        >Hund</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href={`${base}guides/undulat`}
+                                        class="block px-4 py-2 hover:bg-brand-primary/5"
+                                        >Undulat</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href={`${base}guides/hamster`}
+                                        class="block px-4 py-2 hover:bg-brand-primary/5"
+                                        >Hamster</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href={`${base}guides/marsvin`}
+                                        class="block px-4 py-2 hover:bg-brand-primary/5"
+                                        >Marsvin</a
+                                    >
+                                </li>
+                                <!-- evt. separator + "Se alle guides" -->
+                                <li
+                                    class="my-2 border-t border-brand-primary/10"
+                                >
+                                </li>
+                                <li>
+                                    <a
+                                        href={`${base}guides`}
+                                        class="block px-4 py-2 font-medium hover:bg-brand-primary/5"
+                                        >Se alle guides</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <a
                         href={`${base}blog`}
                         class="py-2 hover:text-brand-secondary">Blog</a
@@ -65,15 +143,15 @@ const base = import.meta.env.BASE_URL;
                 <!-- Højre navigation -->
                 <nav class="flex justify-start gap-6 text-lg leading-none">
                     <a
-                        href={`${base}blog`}
+                        href={`${base}ressourcer`}
                         class="py-2 hover:text-brand-secondary">Ressourcer</a
                     >
                     <a
-                        href={`${base}blog`}
+                        href={`${base}om_mig`}
                         class="py-2 hover:text-brand-secondary">Om mig</a
                     >
                     <a
-                        href={`${base}blog`}
+                        href={`${base}kontakt`}
                         class="py-2 hover:text-brand-secondary">Kontakt</a
                     >
                 </nav>
@@ -83,6 +161,8 @@ const base = import.meta.env.BASE_URL;
         <main class="flex-1">
             <slot />
         </main>
+
+        <SocialGrid instagramUrl="#" tiktokUrl="#" />
 
         <footer class="mt-auto border-t border-brand-primary/30">
             <div class="container py-5 grid md:grid-cols-3 gap-8">

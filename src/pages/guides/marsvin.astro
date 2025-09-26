@@ -1,0 +1,30 @@
+---
+import Base from "../../layouts/Base.astro";
+import { animals } from "../../data/animals";
+const base = import.meta.env.BASE_URL;
+const marsvin = animals.find((animal) => animal.slug === "marsvin");
+---
+
+<Base title="Marsvin guide – StemmeForDyrene">
+    <section class="container py-12">
+        <h1 class="font-heading text-3xl mb-6">Marsvin guide</h1>
+        <div class="grid md:grid-cols-2 gap-6">
+            {
+                marsvin ? (
+                    <div class="block bg-white rounded-2xl border border-brand-primary/20 p-5 shadow-soft hover:border-brand-primary">
+                        <h2 class="font-heading text-xl">{marsvin.name}</h2>
+                        <p class="text-sm opacity-80 mt-1">{marsvin.short}</p>
+                        <div class="mt-4">
+                            <h3 class="font-heading text-lg mb-2">
+                                Pleje og boligkrav
+                            </h3>
+                            <p class="text-sm opacity-80">{marsvin.care}</p>
+                        </div>
+                    </div>
+                ) : (
+                    <p>Information om marsvin er ikke tilgængelig lige nu.</p>
+                )
+            }
+        </div>
+    </section></Base
+>
