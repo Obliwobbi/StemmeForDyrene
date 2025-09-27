@@ -37,8 +37,9 @@ const base = import.meta.env.BASE_URL;
                 class="container grid grid-cols-[1fr_auto_1fr] items-center gap-x-8 py-3 md:py-4"
             >
                 <!-- Venstre navigation -->
-                <!-- Venstre navigation -->
-                <nav class="flex justify-end gap-6 text-lg leading-none">
+                <nav
+                    class="hidden md:flex justify-end gap-6 text-lg leading-none"
+                >
                     <a href={`${base}`} class="py-2 hover:text-brand-secondary"
                         >Forside</a
                     >
@@ -140,8 +141,22 @@ const base = import.meta.env.BASE_URL;
                     />
                 </a>
 
+                <!-- Mobile hamburger (kun mobil) -->
+                <button
+                    id="menuBtn"
+                    class="col-start-3 row-start-1 justify-self-end md:hidden inline-flex flex-col items-center justify-center gap-1 p-2 rounded-lg border border-brand-primary/30"
+                    aria-controls="mobileDrawer"
+                    aria-expanded="false"
+                >
+                    <span class="block h-0.5 w-6 bg-black"></span>
+                    <span class="block h-0.5 w-6 bg-black"></span>
+                    <span class="block h-0.5 w-6 bg-black"></span>
+                </button>
+
                 <!-- Højre navigation -->
-                <nav class="flex justify-start gap-6 text-lg leading-none">
+                <nav
+                    class="hidden md:flex justify-start gap-6 text-lg leading-none"
+                >
                     <a
                         href={`${base}ressourcer`}
                         class="py-2 hover:text-brand-secondary">Ressourcer</a
@@ -156,11 +171,160 @@ const base = import.meta.env.BASE_URL;
                     >
                 </nav>
             </div>
+            <!-- Mørk overlay -->
+            <div
+                id="menuOverlay"
+                class="hidden fixed inset-0 bg-black/40 md:hidden z-[65]"
+            >
+            </div>
+
+            <!-- Højre off-canvas drawer -->
+            <nav
+                id="mobileDrawer"
+                class="fixed inset-y-0 right-0 w-[82vw] max-w-80 sm:max-w-96 bg-white shadow-2xl md:hidden z-[70]
+         translate-x-full transition-transform duration-200 will-change-transform"
+                aria-hidden="true"
+            >
+                <div class="h-full flex flex-col">
+                    <div
+                        class="px-5 py-4 border-b border-brand-primary/20 flex items-center justify-between"
+                    >
+                        <span class="font-semibold text-lg">Menu</span>
+                        <button
+                            id="closeDrawer"
+                            class="p-2"
+                            aria-label="Luk menu"
+                        >
+                            ✕
+                        </button>
+                    </div>
+
+                    <div class="p-5 grid gap-2 text-lg">
+                        <a
+                            href={`${base}`}
+                            class="py-2 hover:text-brand-secondary">Forside</a
+                        >
+
+                        <!-- GUIDES som fold-ud -->
+                        <details class="py-1 group">
+                            <summary
+                                class="cursor-pointer list-none py-2 inline-flex items-center gap-2"
+                            >
+                                <span>Guides</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-[1.05em] w-[1.05em] opacity-70"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.146l3.71-3.915a.75.75 0 111.08 1.04l-4.24 4.47a.75.75 0 01-1.08 0l-4.24-4.47a.75.75 0 01.02-1.06z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </summary>
+                            <div class="pl-3 flex flex-col">
+                                <a
+                                    href={`${base}guides/hund`}
+                                    class="py-1 hover:text-brand-secondary"
+                                    >Hund</a
+                                >
+                                <a
+                                    href={`${base}guides/undulat`}
+                                    class="py-1 hover:text-brand-secondary"
+                                    >Undulat</a
+                                >
+                                <a
+                                    href={`${base}guides/hamster`}
+                                    class="py-1 hover:text-brand-secondary"
+                                    >Hamster</a
+                                >
+                                <a
+                                    href={`${base}guides/marsvin`}
+                                    class="py-1 hover:text-brand-secondary"
+                                    >Marsvin</a
+                                >
+                                <div
+                                    class="my-2 border-t border-brand-primary/10"
+                                >
+                                </div>
+                                <a
+                                    href={`${base}guides`}
+                                    class="py-1 font-medium hover:text-brand-secondary"
+                                    >Se alle guides</a
+                                >
+                            </div>
+                        </details>
+
+                        <a
+                            href={`${base}blog`}
+                            class="py-2 hover:text-brand-secondary">Blog</a
+                        >
+                        <a
+                            href={`${base}ressourcer`}
+                            class="py-2 hover:text-brand-secondary"
+                            >Ressourcer</a
+                        >
+                        <a
+                            href={`${base}om_mig`}
+                            class="py-2 hover:text-brand-secondary">Om mig</a
+                        >
+                        <a
+                            href={`${base}kontakt`}
+                            class="py-2 hover:text-brand-secondary">Kontakt</a
+                        >
+                    </div>
+                </div>
+            </nav>
         </header>
 
         <main class="flex-1">
             <slot />
         </main>
+
+        <script is:inline>
+            const btn = document.getElementById("menuBtn");
+            const drawer = document.getElementById("mobileDrawer");
+            const overlay = document.getElementById("menuOverlay");
+            const closeBtn = document.getElementById("closeDrawer");
+
+            const openDrawer = () => {
+                drawer.classList.remove("translate-x-full");
+                overlay.classList.remove("hidden");
+                btn?.setAttribute("aria-expanded", "true");
+                // Lås scroll mens menu er åben (kun mobil)
+                document.documentElement.classList.add(
+                    "overflow-hidden",
+                    "md:overflow-auto",
+                );
+            };
+
+            const closeDrawer = () => {
+                drawer.classList.add("translate-x-full");
+                overlay.classList.add("hidden");
+                btn?.setAttribute("aria-expanded", "false");
+                document.documentElement.classList.remove("overflow-hidden");
+            };
+
+            btn?.addEventListener("click", () => {
+                const isOpen = !drawer.classList.contains("translate-x-full");
+                isOpen ? closeDrawer() : openDrawer();
+            });
+
+            overlay?.addEventListener("click", closeDrawer);
+            closeBtn?.addEventListener("click", closeDrawer);
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") closeDrawer();
+            });
+
+            // Luk når man klikker på et link i drawer
+            drawer?.addEventListener("click", (e) => {
+                const t = e.target;
+                if (t instanceof HTMLElement && t.tagName === "A")
+                    closeDrawer();
+            });
+        </script>
 
         <SocialGrid instagramUrl="#" tiktokUrl="#" />
 
@@ -197,7 +361,7 @@ const base = import.meta.env.BASE_URL;
             </div>
             <div class="text-center text-xs py-4 opacity-70">
                 © {new Date().getFullYear()} StemmeForDyrene – Hjemmeside bygget
-                af ObliMedia
+                af Obli Media
             </div>
         </footer>
     </body>
