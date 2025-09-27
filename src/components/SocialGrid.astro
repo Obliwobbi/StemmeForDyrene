@@ -1,7 +1,7 @@
 ---
 const {
-    instagramUrl = "https://www.instagram.com/stemmefordyrene?igsh=MWFqeGI3ejg3cmZlYg==",
-    tiktokUrl = "https://www.tiktok.com/@stemmefordyrene?is_from_webapp=1&sender_device=pc",
+    instagramUrl = "https://www.instagram.com/stemmefordyrene/",
+    tiktokUrl = "https://www.tiktok.com/@stemmefordyrene",
     title = "Følg med på sociale medier",
 } = Astro.props;
 ---
@@ -14,6 +14,9 @@ const {
             <!-- Basic embed via iframe eller bare link kort -->
             <a
                 href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Besøg Stemme for Dyrene på Instagram"
                 class="block rounded-lg border p-4 hover:border-brand-secondary"
             >
                 Se seneste opslag →
@@ -23,6 +26,9 @@ const {
             <h3 class="font-heading mb-2">TikTok</h3>
             <a
                 href={tiktokUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Besøg Stemme for Dyrene på TikTok"
                 class="block rounded-lg border p-4 hover:border-brand-secondary"
             >
                 Se seneste videoer →
