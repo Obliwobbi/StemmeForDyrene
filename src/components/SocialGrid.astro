@@ -1,7 +1,9 @@
 ---
+import { SOCIAL } from "../config/social.ts";
+
 const {
-    instagramUrl = "https://www.instagram.com/stemmefordyrene/",
-    tiktokUrl = "https://www.tiktok.com/@stemmefordyrene",
+    instagramUrl = SOCIAL.instagram,
+    tiktokUrl = SOCIAL.tiktok,
     title = "Følg med på sociale medier",
 } = Astro.props;
 ---

@@ -1,0 +1,39 @@
+---
+import type { AstroComponentFactory } from "astro";
+import { SOCIAL } from "../config/social";
+---
+
+<footer class="mt-auto bg-brand-footer text-brand-text">
+    <div class="container py-5 grid md:grid-cols-3 gap-8">
+        <div>
+            <h3 class="font-heading text-lg mb-2">Om StemmeForDyrene</h3>
+            <p class="text-sm opacity-80">
+                Et kærligt sted med viden om dyrepleje, foder, og gode råd til
+                et trygt hjem.
+            </p>
+        </div>
+        <div>
+            <h3 class="font-heading text-lg mb-2">Følg med</h3>
+            <ul class="text-sm space-y-1">
+                <li>
+                    <a class="hover:text-brand-primary" href={SOCIAL.instagram}
+                        >Instagram</a
+                    >
+                </li>
+                <li>
+                    <a class="hover:text-brand-primary" href={SOCIAL.tiktok}
+                        >TikTok</a
+                    >
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="font-heading text-lg mb-2">Kontakt</h3>
+            <p class="text-sm opacity-80">kontakt@stemmefordyrene.dk</p>
+        </div>
+    </div>
+    <div class="text-center text-xs py-4 opacity-70">
+        © {new Date().getFullYear()} StemmeForDyrene – Hjemmeside bygget af Obli
+        Media
+    </div>
+</footer>
