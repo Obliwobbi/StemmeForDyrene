@@ -1,15 +1,16 @@
 ---
 import "../styles/tailwind.css";
 import logoUrl from "../assets/StemmeForDyrene_logo.png";
+import animalsUrl from "../assets/StemmeForDyrene_dyr_footer.png";
 
 import SocialGrid from "../components/SocialGrid.astro";
 
-import { SOCIAL } from "../config/social.ts";
+import { SOCIAL } from "../config/social";
 
 const {
-    title = "StemmeForDyrene",
-    description = "Viden, omsorg og kærlighed til kæledyr",
-    noIndex = false,
+  title = "StemmeForDyrene",
+  description = "Viden, omsorg og kærlighed til kæledyr",
+  noIndex = false,
 } = Astro.props;
 
 // VIGTIGT for GitHub Pages: base bliver fx "/stemmefordyrene/" i prod, "/" lokalt
@@ -17,348 +18,325 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <html lang="da">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="description" content={description} />
-        {noIndex && <meta name="robots" content="noindex,nofollow" />}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap"
-            rel="stylesheet"
-        />
-        <title>{title}</title>
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
 
-    <body class="min-h-[100svh] flex flex-col">
-        <header
-            class="sticky top-0 z-50 border-b border-brand-primary/30 bg-white/70 backdrop-blur"
-        >
-            <div
-                class="container grid grid-cols-[1fr_auto_1fr] items-center gap-x-8 py-3 md:py-4"
+  <body class="min-h-[100svh] flex flex-col">
+    <header
+      class="sticky top-0 z-50 border-b border-brand-primary/30 bg-white/70 backdrop-blur"
+    >
+      <div
+        class="container grid grid-cols-[1fr_auto_1fr] items-center gap-x-8 py-3 md:py-4"
+      >
+        <!-- Venstre navigation -->
+        <nav class="hidden md:flex justify-end gap-6 text-lg leading-none">
+          <a href={`${base}`} class="py-2 hover:text-brand-secondary">Forside</a
+          >
+
+          <!-- GUIDES + DROPDOWN -->
+          <div class="relative group">
+            <!-- Primært link til den fulde oversigt -->
+            <a
+              href={`${base}guides`}
+              class="py-2 inline-flex items-center gap-1 hover:text-brand-secondary"
+              aria-haspopup="true"
             >
-                <!-- Venstre navigation -->
-                <nav
-                    class="hidden md:flex justify-end gap-6 text-lg leading-none"
-                >
-                    <a href={`${base}`} class="py-2 hover:text-brand-secondary"
-                        >Forside</a
-                    >
+              Guides
+              <!-- lille caret -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-[1.05em] w-[1.05em] opacity-70"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.146l3.71-3.915a.75.75 0 111.08 1.04l-4.24 4.47a.75.75 0 01-1.08 0l-4.24-4.47a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
 
-                    <!-- GUIDES + DROPDOWN -->
-                    <div class="relative group">
-                        <!-- Primært link til den fulde oversigt -->
-                        <a
-                            href={`${base}guides`}
-                            class="py-2 inline-flex items-center gap-1 hover:text-brand-secondary"
-                            aria-haspopup="true"
-                        >
-                            Guides
-                            <!-- lille caret -->
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-[1.05em] w-[1.05em] opacity-70"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.146l3.71-3.915a.75.75 0 111.08 1.04l-4.24 4.47a.75.75 0 01-1.08 0l-4.24-4.47a.75.75 0 01.02-1.06z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-
-                        <!-- Dropdown (vises på hover/focus) -->
-                        <div
-                            class="absolute left-1/2 -translate-x-1/2 mt-2 w-56 rounded-xl border border-brand-primary/20 bg-white shadow-xl
+            <!-- Dropdown (vises på hover/focus) -->
+            <div
+              class="absolute left-1/2 -translate-x-1/2 mt-2 w-56 rounded-xl border border-brand-primary/20 bg-white shadow-xl
              opacity-0 invisible translate-y-1 transition-all duration-150 ease-out
              group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
              group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 z-50"
-                            role="menu"
-                        >
-                            <ul class="py-2">
-                                <!-- Tilpas dyrene og stierne efter din struktur -->
-                                <li>
-                                    <a
-                                        href={`${base}guides/hund`}
-                                        class="block px-4 py-2 hover:bg-brand-primary/5"
-                                        >Hund</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href={`${base}guides/undulat`}
-                                        class="block px-4 py-2 hover:bg-brand-primary/5"
-                                        >Undulat</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href={`${base}guides/marsvin`}
-                                        class="block px-4 py-2 hover:bg-brand-primary/5"
-                                        >Marsvin</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href={`${base}guides/hamster`}
-                                        class="block px-4 py-2 hover:bg-brand-primary/5"
-                                        >Hamster</a
-                                    >
-                                </li>
-                                <!-- evt. separator + "Se alle guides" -->
-                                <li
-                                    class="my-2 border-t border-brand-primary/10"
-                                >
-                                </li>
-                                <li>
-                                    <a
-                                        href={`${base}guides`}
-                                        class="block px-4 py-2 font-medium hover:bg-brand-primary/5"
-                                        >Se alle guides</a
-                                    >
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <a
-                        href={`${base}blog`}
-                        class="py-2 hover:text-brand-secondary">Blog</a
-                    >
-                </nav>
-
-                <!-- Logo (midterkolonne er 'auto' = kun logoets bredde) -->
-                <a
-                    href={`${base}`}
-                    aria-label="Forside"
-                    class="inline-flex items-center shrink-0 mx-6 md:mx-10"
-                >
-                    <img
-                        src={logoUrl.src}
-                        alt="StemmeForDyrene"
-                        class="block h-10 w-10"
-                    />
-                </a>
-
-                <!-- Mobile hamburger (kun mobil) -->
-                <button
-                    id="menuBtn"
-                    class="col-start-3 row-start-1 justify-self-end md:hidden inline-flex flex-col items-center justify-center gap-1 p-2 rounded-lg border border-brand-primary/30"
-                    aria-controls="mobileDrawer"
-                    aria-expanded="false"
-                >
-                    <span class="block h-0.5 w-6 bg-black"></span>
-                    <span class="block h-0.5 w-6 bg-black"></span>
-                    <span class="block h-0.5 w-6 bg-black"></span>
-                </button>
-
-                <!-- Højre navigation -->
-                <nav
-                    class="hidden md:flex justify-start gap-6 text-lg leading-none"
-                >
-                    <a
-                        href={`${base}ressourcer`}
-                        class="py-2 hover:text-brand-secondary">Ressourcer</a
-                    >
-                    <a
-                        href={`${base}om_mig`}
-                        class="py-2 hover:text-brand-secondary">Om mig</a
-                    >
-                    <a
-                        href={`${base}kontakt`}
-                        class="py-2 hover:text-brand-secondary">Kontakt</a
-                    >
-                </nav>
+              role="menu"
+            >
+              <ul class="py-2">
+                <!-- Tilpas dyrene og stierne efter din struktur -->
+                <li>
+                  <a
+                    href={`${base}guides/hund`}
+                    class="block px-4 py-2 hover:bg-brand-primary/5">Hund</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href={`${base}guides/undulat`}
+                    class="block px-4 py-2 hover:bg-brand-primary/5">Undulat</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href={`${base}guides/marsvin`}
+                    class="block px-4 py-2 hover:bg-brand-primary/5">Marsvin</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href={`${base}guides/hamster`}
+                    class="block px-4 py-2 hover:bg-brand-primary/5">Hamster</a
+                  >
+                </li>
+                <!-- evt. separator + "Se alle guides" -->
+                <li class="my-2 border-t border-brand-primary/10"></li>
+                <li>
+                  <a
+                    href={`${base}guides`}
+                    class="block px-4 py-2 font-medium hover:bg-brand-primary/5"
+                    >Se alle guides</a
+                  >
+                </li>
+              </ul>
             </div>
-        </header>
-        <!-- Overlay bag drawer -->
-        <div
-            id="menuOverlay"
-            class="fixed inset-0 bg-black/20 hidden z-[60] md:hidden"
-            aria-hidden="true"
-        >
-        </div>
+          </div>
 
-        <!-- Højre off-canvas drawer -->
-        <nav
-            id="mobileDrawer"
-            class="fixed inset-y-0 right-0 w-[82vw] max-w-80 sm:max-w-96 bg-white/70 backdrop-blur border-l border-brand-primary/30 shadow-2xl md:hidden z-[70]
-                translate-x-full transition-transform duration-200 will-change-transform"
-            aria-hidden="true"
-        >
-            <div class="h-full flex flex-col">
-                <div
-                    class="px-5 py-4 border-b border-brand-primary/20 flex items-center justify-between"
-                >
-                    <span class="font-semibold text-lg">Menu</span>
-                    <button id="closeDrawer" class="p-2" aria-label="Luk menu">
-                        ✕
-                    </button>
-                </div>
-
-                <div class="p-5 grid gap-2 text-lg">
-                    <a href={`${base}`} class="py-2 hover:text-brand-secondary"
-                        >Forside</a
-                    >
-
-                    <!-- GUIDES som fold-ud -->
-                    <details class="py-1 group">
-                        <summary
-                            class="cursor-pointer list-none py-2 inline-flex items-center gap-2"
-                        >
-                            <span>Guides</span>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-[1.05em] w-[1.05em] opacity-70"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.146l3.71-3.915a.75.75 0 111.08 1.04l-4.24 4.47a.75.75 0 01-1.08 0l-4.24-4.47a.75.75 0 01.02-1.06z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </summary>
-                        <div class="pl-3 flex flex-col">
-                            <a
-                                href={`${base}guides/hund`}
-                                class="py-1 hover:text-brand-secondary">Hund</a
-                            >
-                            <a
-                                href={`${base}guides/undulat`}
-                                class="py-1 hover:text-brand-secondary"
-                                >Undulat</a
-                            >
-                            <a
-                                href={`${base}guides/hamster`}
-                                class="py-1 hover:text-brand-secondary"
-                                >Hamster</a
-                            >
-                            <a
-                                href={`${base}guides/marsvin`}
-                                class="py-1 hover:text-brand-secondary"
-                                >Marsvin</a
-                            >
-                            <div class="my-2 border-t border-brand-primary/10">
-                            </div>
-                            <a
-                                href={`${base}guides`}
-                                class="py-1 font-medium hover:text-brand-secondary"
-                                >Se alle guides</a
-                            >
-                        </div>
-                    </details>
-
-                    <a
-                        href={`${base}blog`}
-                        class="py-2 hover:text-brand-secondary">Blog</a
-                    >
-                    <a
-                        href={`${base}ressourcer`}
-                        class="py-2 hover:text-brand-secondary">Ressourcer</a
-                    >
-                    <a
-                        href={`${base}om_mig`}
-                        class="py-2 hover:text-brand-secondary">Om mig</a
-                    >
-                    <a
-                        href={`${base}kontakt`}
-                        class="py-2 hover:text-brand-secondary">Kontakt</a
-                    >
-                </div>
-            </div>
+          <a href={`${base}blog`} class="py-2 hover:text-brand-secondary"
+            >Blog</a
+          >
         </nav>
 
-        <main class="flex-1">
-            <slot />
-        </main>
+        <!-- Logo (midterkolonne er 'auto' = kun logoets bredde) -->
+        <a
+          href={`${base}`}
+          aria-label="Forside"
+          class="inline-flex items-center shrink-0 mx-6 md:mx-10"
+        >
+          <img
+            src={logoUrl.src}
+            alt="StemmeForDyrene"
+            class="block h-10 w-10"
+          />
+        </a>
 
-        <script is:inline>
-            const btn = document.getElementById("menuBtn");
-            const drawer = document.getElementById("mobileDrawer");
-            const overlay = document.getElementById("menuOverlay");
-            const closeBtn = document.getElementById("closeDrawer");
+        <!-- Mobile hamburger (kun mobil) -->
+        <button
+          id="menuBtn"
+          class="col-start-3 row-start-1 justify-self-end md:hidden inline-flex flex-col items-center justify-center gap-1 p-2 rounded-lg border border-brand-primary/30"
+          aria-controls="mobileDrawer"
+          aria-expanded="false"
+        >
+          <span class="block h-0.5 w-6 bg-black"></span>
+          <span class="block h-0.5 w-6 bg-black"></span>
+          <span class="block h-0.5 w-6 bg-black"></span>
+        </button>
 
-            const openDrawer = () => {
-                drawer.classList.remove("translate-x-full");
-                overlay.classList.remove("hidden");
-                btn?.setAttribute("aria-expanded", "true");
-                // Lås scroll mens menu er åben (kun mobil)
-                document.documentElement.classList.add(
-                    "overflow-hidden",
-                    "md:overflow-auto",
-                );
-            };
+        <!-- Højre navigation -->
+        <nav class="hidden md:flex justify-start gap-6 text-lg leading-none">
+          <a href={`${base}ressourcer`} class="py-2 hover:text-brand-secondary"
+            >Ressourcer</a
+          >
+          <a href={`${base}om_mig`} class="py-2 hover:text-brand-secondary"
+            >Om mig</a
+          >
+          <a href={`${base}kontakt`} class="py-2 hover:text-brand-secondary"
+            >Kontakt</a
+          >
+        </nav>
+      </div>
+    </header>
+    <!-- Overlay bag drawer -->
+    <div
+      id="menuOverlay"
+      class="fixed inset-0 bg-black/20 hidden z-[60] md:hidden"
+      aria-hidden="true"
+    >
+    </div>
 
-            const closeDrawer = () => {
-                drawer.classList.add("translate-x-full");
-                overlay.classList.add("hidden");
-                btn?.setAttribute("aria-expanded", "false");
-                document.documentElement.classList.remove("overflow-hidden");
-            };
+    <!-- Højre off-canvas drawer -->
+    <nav
+      id="mobileDrawer"
+      class="fixed inset-y-0 right-0 w-[82vw] max-w-80 sm:max-w-96 bg-white/70 backdrop-blur border-l border-brand-primary/30 shadow-2xl md:hidden z-[70]
+                translate-x-full transition-transform duration-200 will-change-transform"
+      aria-hidden="true"
+    >
+      <div class="h-full flex flex-col">
+        <div
+          class="px-5 py-4 border-b border-brand-primary/20 flex items-center justify-between"
+        >
+          <span class="font-semibold text-lg">Menu</span>
+          <button id="closeDrawer" class="p-2" aria-label="Luk menu">
+            ✕
+          </button>
+        </div>
 
-            btn?.addEventListener("click", () => {
-                const isOpen = !drawer.classList.contains("translate-x-full");
-                isOpen ? closeDrawer() : openDrawer();
-            });
+        <div class="p-5 grid gap-2 text-lg">
+          <a href={`${base}`} class="py-2 hover:text-brand-secondary">Forside</a
+          >
 
-            overlay?.addEventListener("click", closeDrawer);
-            closeBtn?.addEventListener("click", closeDrawer);
-
-            document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape") closeDrawer();
-            });
-
-            // Luk når man klikker på et link i drawer
-            drawer?.addEventListener("click", (e) => {
-                const t = e.target;
-                if (t instanceof HTMLElement && t.tagName === "A")
-                    closeDrawer();
-            });
-        </script>
-
-        <SocialGrid />
-
-        <footer class="mt-auto border-t border-brand-primary/30">
-            <div class="container py-5 grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="font-heading text-lg mb-2">
-                        Om StemmeForDyrene
-                    </h3>
-                    <p class="text-sm opacity-80">
-                        Et kærligt sted med viden om dyrepleje, foder, og gode
-                        råd til et trygt hjem.
-                    </p>
-                </div>
-                <div>
-                    <h3 class="font-heading text-lg mb-2">Følg med</h3>
-                    <ul class="text-sm space-y-1">
-                        <li>
-                            <a
-                                class="hover:text-brand-primary"
-                                href={SOCIAL.instagram}>Instagram</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                class="hover:text-brand-primary"
-                                href={SOCIAL.tiktok}>TikTok</a
-                            >
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-heading text-lg mb-2">Kontakt</h3>
-                    <p class="text-sm opacity-80">kontakt@stemmefordyrene.dk</p>
-                </div>
+          <!-- GUIDES som fold-ud -->
+          <details class="py-1 group">
+            <summary
+              class="cursor-pointer list-none py-2 inline-flex items-center gap-2"
+            >
+              <span>Guides</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-[1.05em] w-[1.05em] opacity-70"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.146l3.71-3.915a.75.75 0 111.08 1.04l-4.24 4.47a.75.75 0 01-1.08 0l-4.24-4.47a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </summary>
+            <div class="pl-3 flex flex-col">
+              <a
+                href={`${base}guides/hund`}
+                class="py-1 hover:text-brand-secondary">Hund</a
+              >
+              <a
+                href={`${base}guides/undulat`}
+                class="py-1 hover:text-brand-secondary">Undulat</a
+              >
+              <a
+                href={`${base}guides/hamster`}
+                class="py-1 hover:text-brand-secondary">Hamster</a
+              >
+              <a
+                href={`${base}guides/marsvin`}
+                class="py-1 hover:text-brand-secondary">Marsvin</a
+              >
+              <div class="my-2 border-t border-brand-primary/10"></div>
+              <a
+                href={`${base}guides`}
+                class="py-1 font-medium hover:text-brand-secondary"
+                >Se alle guides</a
+              >
             </div>
-            <div class="text-center text-xs py-4 opacity-70">
-                © {new Date().getFullYear()} StemmeForDyrene – Hjemmeside bygget
-                af Obli Media
-            </div>
-        </footer>
-    </body>
+          </details>
+
+          <a href={`${base}blog`} class="py-2 hover:text-brand-secondary"
+            >Blog</a
+          >
+          <a href={`${base}ressourcer`} class="py-2 hover:text-brand-secondary"
+            >Ressourcer</a
+          >
+          <a href={`${base}om_mig`} class="py-2 hover:text-brand-secondary"
+            >Om mig</a
+          >
+          <a href={`${base}kontakt`} class="py-2 hover:text-brand-secondary"
+            >Kontakt</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <script is:inline>
+      const btn = document.getElementById("menuBtn");
+      const drawer = document.getElementById("mobileDrawer");
+      const overlay = document.getElementById("menuOverlay");
+      const closeBtn = document.getElementById("closeDrawer");
+
+      const openDrawer = () => {
+        drawer.classList.remove("translate-x-full");
+        overlay.classList.remove("hidden");
+        btn?.setAttribute("aria-expanded", "true");
+        // Lås scroll mens menu er åben (kun mobil)
+        document.documentElement.classList.add(
+          "overflow-hidden",
+          "md:overflow-auto"
+        );
+      };
+
+      const closeDrawer = () => {
+        drawer.classList.add("translate-x-full");
+        overlay.classList.add("hidden");
+        btn?.setAttribute("aria-expanded", "false");
+        document.documentElement.classList.remove("overflow-hidden");
+      };
+
+      btn?.addEventListener("click", () => {
+        const isOpen = !drawer.classList.contains("translate-x-full");
+        isOpen ? closeDrawer() : openDrawer();
+      });
+
+      overlay?.addEventListener("click", closeDrawer);
+      closeBtn?.addEventListener("click", closeDrawer);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeDrawer();
+      });
+
+      // Luk når man klikker på et link i drawer
+      drawer?.addEventListener("click", (e) => {
+        const t = e.target;
+        if (t instanceof HTMLElement && t.tagName === "A") closeDrawer();
+      });
+    </script>
+
+    <SocialGrid />
+
+    <div>
+      <img
+        src={animalsUrl.src}
+        alt="StemmeForDyrene"
+        class="items-center justify-center max-w-6/12"
+      />
+    </div>
+
+    <footer class="mt-auto border-t border-brand-primary/30">
+      <div class="container py-5 grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="font-heading text-lg mb-2">Om StemmeForDyrene</h3>
+          <p class="text-sm opacity-80">
+            Et kærligt sted med viden om dyrepleje, foder, og gode råd til et
+            trygt hjem.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-heading text-lg mb-2">Følg med</h3>
+          <ul class="text-sm space-y-1">
+            <li>
+              <a class="hover:text-brand-primary" href={SOCIAL.instagram}
+                >Instagram</a
+              >
+            </li>
+            <li>
+              <a class="hover:text-brand-primary" href={SOCIAL.tiktok}>TikTok</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-heading text-lg mb-2">Kontakt</h3>
+          <p class="text-sm opacity-80">kontakt@stemmefordyrene.dk</p>
+        </div>
+      </div>
+      <div class="text-center text-xs py-4 opacity-70">
+        © {new Date().getFullYear()} StemmeForDyrene – Hjemmeside bygget af Obli
+        Media
+      </div>
+    </footer>
+  </body>
 </html>
